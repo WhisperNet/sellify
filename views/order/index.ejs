@@ -1,0 +1,37 @@
+<% layout('boilerplate') %>
+
+    <% for(r of orders) {%>
+        <% if(r.status!=="Delivered" ){ %>
+            <div class="card mx-auto <%= r.status=='Delivered'?" border-success":" border-primary" %> mb-3"
+                style="max-width:
+                35rem;">
+                <div class="card-header">
+                    <%= "To Be Delivered" %>
+                        <span class="badge rounded-pill text-bg-success">Payment Verified</span>
+                </div>
+                <div class="card-body">
+                    <p>Ordered products:
+                    <ul>
+                        <% for(product of r.product){ %>
+                            <li>
+                                <%= product %>
+                            </li>
+                            <% } %>
+                    </ul>
+                    </p>
+                    <hr>
+                    <p>Total Price: <%= r.price %>
+                    </p>
+                    <hr>
+                    <p>Delivery Address: <%= r.address %>
+                    </p>
+                    <p>Phone Number: <%= r.phone %>
+                    </p>
+                    <hr>
+                    <form action="/order/<%= r._id %>?_method=PUT" method="post">
+                        <button class="btn btn-primary">Deliver</button>
+                    </form>
+                </div>
+            </div>
+            <% } %>
+                <% } %>
